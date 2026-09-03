@@ -15,8 +15,10 @@ export default defineConfig({
     logo: '/favicon.svg',
     nav: [
       { text: '首页', link: '/' },
+      { text: 'Python', link: '/python/' },
       { text: '文章', link: '/posts/' },
-      { text: '指南', link: '/guide/getting-started' }
+      { text: '指南', link: '/guide/getting-started' },
+      { text: '关于', link: '/about' }
     ],
     sidebar: {
       '/guide/': [
@@ -32,7 +34,16 @@ export default defineConfig({
         {
           text: '文章',
           items: [
+            { text: '全部文章', link: '/posts/' },
             { text: 'Hello Antisoft', link: '/posts/hello-antisoft' }
+          ]
+        }
+      ],
+      '/python/': [
+        {
+          text: 'Python',
+          items: [
+            { text: '栏目首页', link: '/python/' }
           ]
         }
       ]
