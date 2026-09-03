@@ -45,6 +45,18 @@ export default defineConfig({
           items: [
             { text: '栏目首页', link: '/python/' }
           ]
+        },
+        {
+          text: '环境管理',
+          items: [
+            { text: '环境管理基础', link: '/python/environment/' }
+          ]
+        },
+        {
+          text: '命令行与模块',
+          items: [
+            { text: 'python -m 的用法', link: '/python/cli/python-m' }
+          ]
         }
       ]
     },
