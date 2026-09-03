@@ -8,7 +8,7 @@ hero:
   actions:
     - theme: brand
       text: 开始阅读
-      link: /antisoft/posts/hello-antisoft
+      link: /posts/hello-antisoft
     - theme: alt
       text: GitHub
       link: https://github.com/liuxu89/antisoft

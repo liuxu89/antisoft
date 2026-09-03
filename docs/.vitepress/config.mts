@@ -12,27 +12,27 @@ export default defineConfig({
   head: [['link', { rel: 'icon', href: '/antisoft/favicon.svg' }]],
 
   themeConfig: {
-    logo: '/antisoft/favicon.svg',
+    logo: '/favicon.svg',
     nav: [
-      { text: '首页', link: '/antisoft/' },
-      { text: '文章', link: '/antisoft/posts/' },
-      { text: '指南', link: '/antisoft/guide/getting-started' }
+      { text: '首页', link: '/' },
+      { text: '文章', link: '/posts/' },
+      { text: '指南', link: '/guide/getting-started' }
     ],
     sidebar: {
-      '/antisoft/guide/': [
+      '/guide/': [
         {
           text: '指南',
           items: [
-            { text: '快速开始', link: '/antisoft/guide/getting-started' },
-            { text: '部署到 GitHub Pages', link: '/antisoft/guide/deploy' }
+            { text: '快速开始', link: '/guide/getting-started' },
+            { text: '部署到 GitHub Pages', link: '/guide/deploy' }
           ]
         }
       ],
-      '/antisoft/posts/': [
+      '/posts/': [
         {
           text: '文章',
           items: [
-            { text: 'Hello Antisoft', link: '/antisoft/posts/hello-antisoft' }
+            { text: 'Hello Antisoft', link: '/posts/hello-antisoft' }
           ]
         }
       ]
