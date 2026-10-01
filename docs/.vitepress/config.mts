@@ -17,10 +17,20 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: 'Python', link: '/python/' },
       { text: '文章', link: '/posts/' },
+      { text: '文摘', link: '/digest/' },
       { text: '指南', link: '/guide/getting-started' },
       { text: '关于', link: '/about' }
     ],
     sidebar: {
+      '/digest/': [
+        {
+          text: '文摘',
+          items: [
+            { text: '全部文摘', link: '/digest/' },
+            { text: '社会加速（罗萨，2003）', link: '/digest/social-acceleration' }
+          ]
+        }
+      ],
       '/guide/': [
         {
           text: '指南',
