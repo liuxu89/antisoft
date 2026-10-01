@@ -8,8 +8,10 @@ Antisoft 技术博客，基于 [VitePress](https://vitepress.dev) 构建，通�
 
 ## 本地开发
 
+使用 Node.js 24 LTS 和 npm，VitePress 固定为 `2.0.0-alpha.20`。使用 nvm 时，可先运行 `nvm install` 和 `nvm use`。
+
 ```bash
-npm install
+npm ci
 npm run docs:dev
 ```
 
