@@ -1,0 +1,53 @@
+name: Validate digest and extract source
+on:
+  push:
+    branches: [codex/digest-social-acceleration]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run docs:build
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Download public paper and prepare extraction
+        run: |
+          curl --fail --location --retry 2 'https://acceleratedclassroom.wordpress.com/wp-content/uploads/2011/03/social-acceleration.pdf' --output /tmp/social-acceleration.pdf
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
+          pdfinfo /tmp/social-acceleration.pdf
+          pdftotext -layout /tmp/social-acceleration.pdf /tmp/social-acceleration.txt
+          npm install --global mineru-open-api
+      - name: Extract with MinerU
+        timeout-minutes: 8
+        continue-on-error: true
+        run: |
+          total=$(pdfinfo /tmp/social-acceleration.pdf | awk '/^Pages:/ {print $2}')
+          for start in $(seq 1 15 "$total"); do
+            end=$((start + 14))
+            if [ "$end" -gt "$total" ]; then end=$total; fi
+            mineru-open-api flash-extract /tmp/social-acceleration.pdf --pages "$start-$end" -o "/tmp/source_p$start-$end.md"
+          done
+      - name: Source pages 1-10
+        if: always()
+        run: pdftotext -layout -f 1 -l 10 /tmp/social-acceleration.pdf -
+      - name: Source pages 11-20
+        if: always()
+        run: pdftotext -layout -f 11 -l 20 /tmp/social-acceleration.pdf -
+      - name: Source pages 21 onward
+        if: always()
+        run: pdftotext -layout -f 21 /tmp/social-acceleration.pdf -

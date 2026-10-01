@@ -17,10 +17,19 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: 'Python', link: '/python/' },
       { text: '文章', link: '/posts/' },
+      { text: '文摘', link: '/digest/' },
       { text: '指南', link: '/guide/getting-started' },
       { text: '关于', link: '/about' }
     ],
     sidebar: {
+      '/digest/': [
+        {
+          text: '文摘',
+          items: [
+            { text: '全部文摘', link: '/digest/' }
+          ]
+        }
+      ],
       '/guide/': [
         {
           text: '指南',
