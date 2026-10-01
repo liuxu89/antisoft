@@ -21,6 +21,15 @@ npm run docs:dev
 npm run docs:build
 ```
 
+部署前，可先在本地构建并预览生成的站点，检查页面、链接和样式：
+
+```bash
+npm run docs:build
+npm run docs:preview
+```
+
+`docs:preview` 用于预览构建产物；修改文档后需重新构建才能看到更新。
+
 ## 栏目
 
 - **Python**：不定期更新
