@@ -26,7 +26,8 @@ export default defineConfig({
         {
           text: '文摘',
           items: [
-            { text: '全部文摘', link: '/digest/' }
+            { text: '全部文摘', link: '/digest/' },
+            { text: '社会加速（罗萨，2003）', link: '/digest/social-acceleration' }
           ]
         }
       ],
