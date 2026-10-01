@@ -4,13 +4,16 @@
 
 ## 环境要求
 
-- Node.js 18 及以上版本
-- npm 或 pnpm
+- Node.js 24 LTS（版本由根目录 `.nvmrc` 指定）
+- npm
+- VitePress 2.0.0-alpha.20（由项目依赖安装）
+
+使用 nvm 时，在仓库根目录运行 `nvm install` 和 `nvm use`。
 
 ## 安装依赖
 
 ```bash
-npm install
+npm ci
 ```
 
 ## 启动开发服务器
