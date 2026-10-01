@@ -2,6 +2,9 @@ name: Validate digest and extract source
 on:
   push:
     branches: [codex/digest-social-acceleration]
+concurrency:
+  group: digest-preparation
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
@@ -20,22 +23,26 @@ jobs:
       - run: npm run docs:build
   extract:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Download public paper and prepare extraction
+      - name: Download public paper
+        timeout-minutes: 2
+        run: curl --fail --location --connect-timeout 15 --max-time 75 'https://acceleratedclassroom.wordpress.com/wp-content/uploads/2011/03/social-acceleration.pdf' --output /tmp/social-acceleration.pdf
+      - name: Prepare PDF text extraction
         run: |
-          curl --fail --location --retry 2 'https://acceleratedclassroom.wordpress.com/wp-content/uploads/2011/03/social-acceleration.pdf' --output /tmp/social-acceleration.pdf
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq poppler-utils
+          if ! command -v pdftotext >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq poppler-utils
+          fi
           pdfinfo /tmp/social-acceleration.pdf
-          pdftotext -layout /tmp/social-acceleration.pdf /tmp/social-acceleration.txt
-          npm install --global mineru-open-api
       - name: Extract with MinerU
-        timeout-minutes: 8
+        timeout-minutes: 2
         continue-on-error: true
         run: |
+          npm install --global mineru-open-api
           total=$(pdfinfo /tmp/social-acceleration.pdf | awk '/^Pages:/ {print $2}')
           for start in $(seq 1 15 "$total"); do
             end=$((start + 14))
